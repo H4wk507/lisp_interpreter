@@ -46,3 +46,34 @@ Error: Cannot operate on non-number '/'.
 ()
 >> list a b x y
 {1 2 3 4}
+
+>> def {add-mul} (\ {x y} {+ x (* x y)})
+()
+>> add-mul 10 20
+210
+>> add-mul 10
+(\ {y} {+ x (* x y)})
+>> def {add-mul-ten} (add-mul 10)
+()
+>> add-mul-ten 50
+510
+
+>> fun {add-together x y} {+ x y}
+>> fun {unpack f xs} {eval (join (list f) xs)}
+>> fun {pack f & xs} {f xs}
+>> def {uncurry} pack
+()
+>> def {curry} unpack
+()
+>> curry + {5 6 7}
+18
+>> uncurry head 5 6 7
+{5}
+>> def {add-uncurried} +
+()
+>> def {add-curried} (curry +)
+()
+>> add-curried {5 6 7}
+18
+>> add-uncurried 5 6 7
+18
