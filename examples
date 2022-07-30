@@ -77,3 +77,36 @@ Error: Cannot operate on non-number '/'.
 18
 >> add-uncurried 5 6 7
 18
+
+>> > 10 5
+1
+>> <= 88 5
+0
+>> == 5 6
+0
+>> == 5 {}
+0
+>> == 1 1
+1
+>> != {} 56
+1
+>> == {1 2 3 {5 6}} {1   2  3   {5 6}}
+1
+>> def {x y} 100 200
+()
+>> if (== x y) {+ x y} {- x y}
+-100
+
+>> (fun {reverse l} {
+  if (== l {})
+    {{}}
+    {join (reverse (tail l)) (head l)}
+})
+
+>> (fun {nth l n} { if (== n 0) {head l} {nth (tail l) (- n 1)}})
+>> (fun {has l x} { if (== l {}) {false} {if (== (eval (head l)) x) {1} {has (tail l) x}}})
+>> (fun {last l} { if (== l {}) {{}} {if (== (tail l) {}) {head l} {last (tail l)}}})
+>> (fun {and x y} {if (== x 0) {false} {if (== y false) {false} {true}}})
+>> (fun {or x y} {if (== x 0) {if (== y 0) {false} {true}} {true}})
+>> (fun {not x} {if (== x 0) {true} {false}})
+
