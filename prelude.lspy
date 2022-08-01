@@ -1,0 +1,29 @@
+(def {nil} {})
+
+(fun {unpack f l} {
+   eval (join (list f) l)
+})
+
+(fun {pack f & xs} {f xs})
+
+(def {curry} unpack)
+(def {uncurry} pack)
+
+(fun {do & l} {
+   if (== l nil)
+      {nil}
+      {last l}
+})
+
+
+(fun {let b} {
+   (( \ {_} b) ())
+})
+
+(fun {fst l} {eval (head l)})
+
+(fun {foldl f z l} {
+   if (== l nil)
+      {z}
+      {foldl f (f z (fst l)) (tail l)}
+})

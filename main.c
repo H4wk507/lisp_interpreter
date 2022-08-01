@@ -1341,10 +1341,13 @@ int main(int argc, char *argv[]) {
   
    lenv *e = lenv_new();
    lenv_add_builtins(e);
-   
    if (argc == 1) {
       puts("Press Ctrl+C to Exit\n");
 
+      // load standard library
+      lval *a = lval_add(lval_sexpr(), lval_str("prelude.lspy"));
+      lval *x = builtin_load(e, a); 
+      lval_del(x);
       while (true) {
          fputs("> ", stdout);
          fgets(input, BUFFER_SIZE, stdin);
